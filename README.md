@@ -13,6 +13,7 @@ Machine Learning & Cloud Computing Path
   ```
   npm install
   ```
+- Create `.env` file and setup with [the following variables](./.env_example)
 - Run the app
   ```
   npm run dev
