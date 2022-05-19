@@ -19,6 +19,9 @@ const Users = db.define(
     },
   },
   {
+    underscored: true,
+  },
+  {
     tableName: 'users',
   },
   {
