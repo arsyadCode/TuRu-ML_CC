@@ -6,6 +6,7 @@ const http = require('http');
 const app = express();
 const cors = require('cors');
 const routes = require('./routes');
+const db = require('./databases/mysql');
 
 const corsOptions = {
   origin: '*',
@@ -16,6 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+db.sync();
 routes(app, express);
 
 const PORT = process.env.PORT || 3000;
