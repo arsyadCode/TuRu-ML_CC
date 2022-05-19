@@ -9,6 +9,9 @@ const Histories = db.define(
     },
   },
   {
+    underscored: true,
+  },
+  {
     tableName: 'histories',
   },
   {

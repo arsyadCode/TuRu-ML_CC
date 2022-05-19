@@ -9,6 +9,9 @@ const Bookmarks = db.define(
     },
   },
   {
+    underscored: true,
+  },
+  {
     tableName: 'bookmarks',
   },
   {
