@@ -19,7 +19,8 @@ app.use(express.json());
 routes(app, express);
 
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || 'localhost';
 const httpServer = http.createServer(app);
 // eslint-disable-next-line no-console
-console.log(`server listening on port: ${PORT}`);
-httpServer.listen(PORT);
+console.log(`server listening on: http://${HOST}:${PORT}`);
+httpServer.listen(PORT, HOST);
