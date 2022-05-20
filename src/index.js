@@ -21,7 +21,7 @@ db.sync();
 routes(app, express);
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || 'localhost';
+const HOST = process.env.HOST || '0.0.0.0';
 const httpServer = http.createServer(app);
 // eslint-disable-next-line no-console
 console.log(`server listening on: http://${HOST}:${PORT}`);
