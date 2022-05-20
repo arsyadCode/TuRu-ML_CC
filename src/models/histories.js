@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../databases/mysql');
+const db = require('../databases/index');
 
 const Histories = db.define(
   'Histories',

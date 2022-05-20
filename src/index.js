@@ -6,7 +6,7 @@ const http = require('http');
 const app = express();
 const cors = require('cors');
 const routes = require('./routes');
-const db = require('./databases/mysql');
+const db = require('./databases/index');
 
 const corsOptions = {
   origin: '*',
