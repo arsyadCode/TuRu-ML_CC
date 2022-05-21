@@ -1,4 +1,5 @@
 const { handleError } = require('../helpers/exceptions');
+const verifyToken = require('../helpers/middleware');
 
 // Router
 const bookmarksRouter = require('./bookmarks');
@@ -32,8 +33,8 @@ module.exports = function routes(app, express) {
     );
   });
 
-  app.use('/api/users', usersRouter(express, usersControllers));
-  app.use('/api/bookmarks', bookmarksRouter(express, bookmarksControllers));
+  app.use('/api/users', usersRouter(express, verifyToken, usersControllers));
+  app.use('/api/bookmarks', bookmarksRouter(express, verifyToken, bookmarksControllers));
 
   // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {

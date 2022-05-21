@@ -18,17 +18,17 @@ class UsersController {
 
   async getUserById(req, res, next) {
     return this.usersUsecase
-      .getUserById(req)
-      .then((use) => res.json(use))
+      .getUserById(req.params.id)
+      .then((user) => res.json(user))
       .catch((error) => next(error));
   }
 
   async createUser(req, res, next) {
     return this.usersUsecase
       .createUser(req)
-      .then((use) => res.status(201).json({
+      .then((user) => res.status(201).json({
         message: usersMessage.create,
-        data: use,
+        data: user,
       }))
       .catch((error) => next(error));
   }

@@ -16,8 +16,8 @@ class UsersUsecase {
     return this.resolveUsers(ids.rows);
   }
 
-  async getUserById(req) {
-    return this.resolveUser(req.params.id)
+  async getUserById(id) {
+    return this.resolveUser(id)
       .then((user) => {
         if (!user) throw new NotFoundError(usersMessage.notFound);
 
