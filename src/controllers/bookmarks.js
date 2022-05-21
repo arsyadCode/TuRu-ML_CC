@@ -5,6 +5,7 @@ class BookmarksController {
     this.bookmarksUsecase = bookmarksUsecase;
     this.getAllBookmarks = this.getAllBookmarks.bind(this);
     this.getBookmarkById = this.getBookmarkById.bind(this);
+    this.getBookmarksByUserId = this.getBookmarksByUserId.bind(this);
     this.createBookmark = this.createBookmark.bind(this);
     this.deleteBookmarkById = this.deleteBookmarkById.bind(this);
   }
@@ -19,6 +20,13 @@ class BookmarksController {
   async getBookmarkById(req, res, next) {
     return this.bookmarksUsecase
       .getBookmarkById(req)
+      .then((bookmark) => res.json(bookmark))
+      .catch((error) => next(error));
+  }
+
+  async getBookmarksByUserId(req, res, next) {
+    return this.bookmarksUsecase
+      .getBookmarksByUserId(req)
       .then((bookmark) => res.json(bookmark))
       .catch((error) => next(error));
   }
