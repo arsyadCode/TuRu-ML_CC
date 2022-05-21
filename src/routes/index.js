@@ -20,7 +20,9 @@ const bookmarksControllers = new BookmarksController(bookmarksUsecases);
 
 module.exports = function routes(app, express) {
   app.get('/', (req, res) => {
-    res.send('Turu yuk');
+    res.send(
+      'Turu yuk <br> <a href="https://documenter.getpostman.com/view/16027759/UyxjHSHH">Turu API Docs</a>',
+    );
   });
 
   app.use('/api/bookmarks', bookmarksRouter(express, bookmarksControllers));
