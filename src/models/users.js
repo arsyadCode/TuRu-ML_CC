@@ -11,7 +11,7 @@ const Users = db.define(
       unique: true,
     },
     password: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING(100),
       allowNull: false,
     },
     token: {
