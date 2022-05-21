@@ -1,6 +1,7 @@
 const { NotFoundError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { bookmarks: bookmarksMessage } = require('../helpers/response-message');
+const { getImageFromLetter } = require('../helpers/sign-language-images');
 
 class BookmarksUsecase {
   constructor(BookmarksRepo) {
@@ -55,7 +56,15 @@ class BookmarksUsecase {
   async resolveBookmark(id) {
     return this.bookmarksRepo
       .findById(id)
-      .then(async (bookmark) => bookmark);
+      .then(async (bookmark) => {
+        // eslint-disable-next-line no-param-reassign
+        bookmark.images = [];
+        for (let i = 0; i < bookmark.text.length; i += 1) {
+          // eslint-disable-next-line no-param-reassign
+          bookmark.images.push(getImageFromLetter(bookmark.text[i]));
+        }
+        return bookmark;
+      });
   }
 }
 
