@@ -31,6 +31,19 @@ class BookmarsRepository {
       .then((bookmark) => bookmark);
   }
 
+  async findByUserId(offset, limit, userId) {
+    return this.BookmarksModel
+      .findAndCountAll({
+        order: [['createdAt', 'DESC']],
+        attributes: ['id'],
+        where: { userId },
+        limit,
+        offset,
+        raw: true,
+      })
+      .then((bookmark) => bookmark);
+  }
+
   async create(bookmark) {
     return this.BookmarksModel
       .create(bookmark)
