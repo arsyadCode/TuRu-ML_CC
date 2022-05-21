@@ -1,4 +1,4 @@
-const { NotFoundError } = require('../helpers/exceptions');
+const { NotFoundError, AuthorizationError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { bookmarks: bookmarksMessage } = require('../helpers/response-message');
 const { getImageFromLetter } = require('../helpers/sign-language-images');
@@ -25,16 +25,21 @@ class BookmarksUsecase {
   }
 
   async createBookmark(req) {
+    const { userId } = req.user;
+    req.body.userId = userId;
     return this.bookmarksRepo
       .create(req.body)
       .then((bookmark) => bookmark);
   }
 
   async deleteBookmarkById(req) {
+    const { userId } = req.user;
     await this.bookmarksRepo
       .findById(req.params.id)
       .then((bookmark) => {
         if (!bookmark) throw new NotFoundError(bookmarksMessage.notFound);
+
+        if (userId !== bookmark.userId) throw new AuthorizationError(bookmarksMessage.forbidden);
 
         return this.bookmarksRepo.deleteById(req.params.id);
       });
@@ -57,12 +62,13 @@ class BookmarksUsecase {
     return this.bookmarksRepo
       .findById(id)
       .then(async (bookmark) => {
-        // eslint-disable-next-line no-param-reassign
-        bookmark.images = [];
-        for (let i = 0; i < bookmark.text.length; i += 1) {
-          // eslint-disable-next-line no-param-reassign
-          bookmark.images.push(getImageFromLetter(bookmark.text[i]));
+        if (bookmark) {
+          bookmark.images = [];
+          for (let i = 0; i < bookmark.text.length; i += 1) {
+            bookmark.images.push(getImageFromLetter(bookmark.text[i]));
+          }
         }
+
         return bookmark;
       });
   }
