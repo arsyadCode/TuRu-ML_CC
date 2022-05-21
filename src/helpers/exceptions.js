@@ -43,6 +43,8 @@ const handleError = (err, res) => {
       message,
     });
   } else {
+    // eslint-disable-next-line no-console
+    console.log(err);
     // server error
     res.status(500).json({
       message: 'internal server error',
