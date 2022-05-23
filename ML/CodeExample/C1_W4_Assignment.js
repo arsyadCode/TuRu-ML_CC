@@ -38,7 +38,7 @@ async function train() {
         
   // Compile the model using the categoricalCrossentropy loss, and
   // the optimizer you defined above.
-  model.compile({optimizer: optimizer, loss: 'categoricalCrossentropy'}, metrics=['accuracy']);
+  model.compile({optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy']});
  
   let loss = 0;
   model.fit(dataset.xs, dataset.ys, {
@@ -46,8 +46,8 @@ async function train() {
     callbacks: {
       onBatchEnd: async (batch, logs) => {
         loss = logs.loss.toFixed(5);
-//        acc = logs.acc.toFixed(5);
-        console.log('LOSS: ' + loss);
+        acc = logs.acc.toFixed(2);
+        console.log('LOSS: ' + loss + '; ACC: ' + acc);
         }
       }
    });
