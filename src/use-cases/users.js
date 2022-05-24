@@ -35,7 +35,7 @@ class UsersUsecase {
 
     return this.usersRepo
       .create(req.body)
-      .then(async (user) => user);
+      .then(async (user) => this.resolveUser(user.id));
   }
 
   async resolveUsers(ids) {
