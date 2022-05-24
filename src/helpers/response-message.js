@@ -11,8 +11,8 @@ module.exports = {
   },
   bookmarks: {
     create: 'bookmark has been created',
-    delete: 'bookmark been deleted',
+    delete: 'bookmark has been deleted',
     notFound: 'bookmark not found',
-    forbidden: 'bookmark forbidden',
+    forbidden: 'bookmark is forbidden',
   },
 };
