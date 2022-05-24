@@ -71,7 +71,12 @@ class UsersUsecase {
 
     const token = await this.getNewToken(user.id);
 
-    return { token };
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token,
+    };
   }
 
   async getNewToken(userId) {
