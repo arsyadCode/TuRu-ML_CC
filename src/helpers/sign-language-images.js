@@ -25,9 +25,15 @@ const gdriveId = {
   X: '1CTnIjREtXAYKSp33pjxM0qyGciQe_0l2',
   Y: '1RR3OZQztRkAzlzY4UE0m55AnQcSU2CQ-',
   Z: '1sm4xBc7H9k556gjbDbUhUEXRbnI3921i',
+  ' ': '1jBuZWhR6J7C1FS7Y3wt_I51mkOP4R8kT',
+  others: '1h9DOfF2puZBle-EEXNIgJnTLRjuiqX9A',
 };
 
-const getImageFromLetter = (letter) => `https://drive.google.com/uc?id=${gdriveId[letter.toUpperCase()]}`;
+const getImageFromLetter = (letter) => {
+  const imageId = gdriveId[letter.toUpperCase()] ? gdriveId[letter.toUpperCase()] : gdriveId.others;
+
+  return `https://drive.google.com/uc?id=${imageId}`;
+};
 
 module.exports = {
   getImageFromLetter,
