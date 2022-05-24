@@ -29,13 +29,14 @@ class BookmarksUsecase {
   async getBookmarksByUserId(req) {
     const { userId: credentialsId } = req.user;
     const { id: userId } = req.params;
+    const { query } = req.query;
 
     // eslint-disable-next-line eqeqeq
     if (userId != credentialsId) throw new AuthorizationError(bookmarksMessage.forbidden);
     const { page, size } = req.query;
 
     const { limit, offset } = getPagination(page, size);
-    const ids = await this.bookmarksRepo.findByUserId(offset, limit, userId);
+    const ids = await this.bookmarksRepo.findByUserId(offset, limit, userId, query);
     const result = [];
     ids.rows = ids.rows.forEach((element) => {
       result.push(element.id);

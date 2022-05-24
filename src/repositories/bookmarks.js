@@ -1,4 +1,7 @@
+const Sequelize = require('sequelize');
 const Models = require('../models');
+
+const { Op } = Sequelize;
 
 class BookmarsRepository {
   constructor() {
@@ -31,12 +34,18 @@ class BookmarsRepository {
       .then((bookmark) => bookmark);
   }
 
-  async findByUserId(offset, limit, userId) {
+  async findByUserId(offset, limit, userId, textQuery) {
+    const query = textQuery ? {
+      userId,
+      text: {
+        [Op.iLike]: `%${textQuery}%`,
+      },
+    } : { userId };
     return this.BookmarksModel
       .findAndCountAll({
         order: [['createdAt', 'DESC']],
         attributes: ['id'],
-        where: { userId },
+        where: query,
         limit,
         offset,
         raw: true,
