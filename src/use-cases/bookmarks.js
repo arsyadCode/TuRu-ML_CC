@@ -16,9 +16,11 @@ class BookmarksUsecase {
   }
 
   async getBookmarkById(req) {
+    const { userId } = req.user;
     return this.resolveBookmark(req.params.id)
       .then((bookmark) => {
         if (!bookmark) throw new NotFoundError(bookmarksMessage.notFound);
+        if (userId !== bookmark.userId) throw new AuthorizationError(bookmarksMessage.forbidden);
 
         return bookmark;
       });
@@ -56,7 +58,6 @@ class BookmarksUsecase {
       .findById(req.params.id)
       .then((bookmark) => {
         if (!bookmark) throw new NotFoundError(bookmarksMessage.notFound);
-
         if (userId !== bookmark.userId) throw new AuthorizationError(bookmarksMessage.forbidden);
 
         return this.bookmarksRepo.deleteById(req.params.id);
