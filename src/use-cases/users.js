@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { NotFoundError, AuthenticationError } = require('../helpers/exceptions');
+const { NotFoundError, AuthenticationError, InvariantError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { users: usersMessage } = require('../helpers/response-message');
+const { isValidEmail, isValidPass } = require('../helpers/validator');
 
 class UsersUsecase {
   constructor(UsersRepo) {
@@ -26,9 +27,12 @@ class UsersUsecase {
   }
 
   async createUser(req) {
-    const isEmailExist = await this.usersRepo.findByEmail(req.body.email);
+    const { email, password } = req.body;
+    const isEmailExist = await this.usersRepo.findByEmail(email);
 
     if (isEmailExist) throw new NotFoundError(usersMessage.emailExist);
+    if (!isValidEmail(email)) throw new InvariantError(usersMessage.invalidEmail);
+    if (!isValidPass(password)) throw new InvariantError(usersMessage.minimumPass);
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
