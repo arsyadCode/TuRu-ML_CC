@@ -55,6 +55,16 @@ class UsersRepository {
       })
       .then((result) => result);
   }
+
+  async deleteById(id) {
+    return this.UsersModel
+      .destroy({
+        where: {
+          id: parseInt(id, 10),
+        },
+      })
+      .then((result) => result);
+  }
 }
 
 module.exports = UsersRepository;
