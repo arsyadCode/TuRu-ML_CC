@@ -6,6 +6,7 @@ module.exports = function usersRouter(express, verifyToken, usersController) {
   // router.get('/current', usersController.getCurrentUser);
   router.post('/register', usersController.createUser);
   router.post('/login', usersController.login);
+  router.delete('/:id', usersController.deleteUserById);
 
   return router;
 };

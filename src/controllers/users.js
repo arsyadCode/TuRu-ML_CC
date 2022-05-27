@@ -7,6 +7,7 @@ class UsersController {
     this.getUserById = this.getUserById.bind(this);
     this.createUser = this.createUser.bind(this);
     this.login = this.login.bind(this);
+    this.deleteUserById = this.deleteUserById.bind(this);
   }
 
   async getAllUsers(req, res, next) {
@@ -39,6 +40,15 @@ class UsersController {
       .then((result) => res.json({
         message: usersMessage.loginSuccess,
         data: result,
+      }))
+      .catch((error) => next(error));
+  }
+
+  async deleteUserById(req, res, next) {
+    return this.usersUsecase
+      .deleteUserById(req)
+      .then(() => res.json({
+        message: usersMessage.delete,
       }))
       .catch((error) => next(error));
   }

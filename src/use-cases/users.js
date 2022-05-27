@@ -46,6 +46,16 @@ class UsersUsecase {
       .then(async (user) => this.resolveUser(user.id));
   }
 
+  async deleteUserById(req) {
+    await this.usersRepo
+      .findById(req.params.id)
+      .then((user) => {
+        if (!user) throw new NotFoundError(usersMessage.notFound);
+
+        return this.usersRepo.deleteById(req.params.id);
+      });
+  }
+
   async resolveUsers(ids) {
     const users = [];
     await Promise.all(

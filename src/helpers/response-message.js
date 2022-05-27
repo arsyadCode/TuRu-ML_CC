@@ -2,6 +2,7 @@ module.exports = {
   users: {
     create: 'user has been created',
     notFound: 'user not found',
+    delete: 'user has been deleted',
     emailExist: 'email already exists',
     loginSuccess: 'login successfully',
     invalidCredential: 'your password or email wrong',
@@ -19,8 +20,8 @@ module.exports = {
   },
   histories: {
     create: 'history has been created',
-    delete: 'history been deleted',
+    delete: 'history has been deleted',
     notFound: 'history not found',
-    forbidden: 'history forbidden',
+    forbidden: 'history is forbidden',
   },
 };
