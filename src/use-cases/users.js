@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { NotFoundError, AuthenticationError, InvariantError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { users: usersMessage } = require('../helpers/response-message');
+const { getImageFromLetter, getFirstLetterFromPhrase } = require('../helpers/sign-language-images');
 const { isValidEmail, isValidPass } = require('../helpers/validator');
 
 class UsersUsecase {
@@ -27,7 +28,7 @@ class UsersUsecase {
   }
 
   async createUser(req) {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const isEmailExist = await this.usersRepo.findByEmail(email);
 
     if (isEmailExist) throw new NotFoundError(usersMessage.emailExist);
@@ -36,6 +37,9 @@ class UsersUsecase {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
+
+    const photo = getImageFromLetter(getFirstLetterFromPhrase(name));
+    req.body.photo = photo;
 
     return this.usersRepo
       .create(req.body)

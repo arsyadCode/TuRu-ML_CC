@@ -35,6 +35,9 @@ const getImageFromLetter = (letter) => {
   return `https://drive.google.com/uc?id=${imageId}`;
 };
 
+const getFirstLetterFromPhrase = (phrase) => phrase.charAt(0);
+
 module.exports = {
   getImageFromLetter,
+  getFirstLetterFromPhrase,
 };

@@ -14,6 +14,9 @@ const Users = db.define(
       type: Sequelize.STRING(100),
       allowNull: false,
     },
+    photo: {
+      type: Sequelize.STRING(),
+    },
     token: {
       type: Sequelize.STRING(),
     },
