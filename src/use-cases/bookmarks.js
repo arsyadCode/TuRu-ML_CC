@@ -1,4 +1,5 @@
-const { NotFoundError, AuthorizationError } = require('../helpers/exceptions');
+const Joi = require('joi');
+const { NotFoundError, AuthorizationError, InvariantError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { bookmarks: bookmarksMessage } = require('../helpers/response-message');
 const { getImageFromLetter } = require('../helpers/sign-language-images');
@@ -9,6 +10,13 @@ class BookmarksUsecase {
   }
 
   async getAllBookmarks(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
     const ids = await this.bookmarksRepo.findAll(offset, limit);
@@ -27,6 +35,14 @@ class BookmarksUsecase {
   }
 
   async getBookmarksByUserId(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+      query: Joi.string(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { userId: credentialsId } = req.user;
     const { id: userId } = req.params;
     const { query } = req.query;
@@ -46,6 +62,12 @@ class BookmarksUsecase {
   }
 
   async createBookmark(req) {
+    const schema = Joi.object().keys({
+      text: Joi.string().required(),
+    });
+    await schema.validateAsync(req.body).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { userId } = req.user;
     req.body.userId = userId;
     return this.bookmarksRepo

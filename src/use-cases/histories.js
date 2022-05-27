@@ -1,5 +1,5 @@
-/* eslint-disable linebreak-style */
-const { NotFoundError, AuthorizationError } = require('../helpers/exceptions');
+const Joi = require('joi');
+const { NotFoundError, AuthorizationError, InvariantError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { histories: historiesMessage } = require('../helpers/response-message');
 const { getImageFromLetter } = require('../helpers/sign-language-images');
@@ -10,6 +10,13 @@ class HistoryUsecase {
   }
 
   async getAllHistories(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
     const ids = await this.historiesRepo.findAll(offset, limit);
@@ -29,6 +36,14 @@ class HistoryUsecase {
   }
 
   async getHistoriesByUserId(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+      query: Joi.string(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { userId: credentialsId } = req.user;
     const { id: userId } = req.params;
     const { query } = req.query;
@@ -48,6 +63,12 @@ class HistoryUsecase {
   }
 
   async createHistory(req) {
+    const schema = Joi.object().keys({
+      text: Joi.string().required(),
+    });
+    await schema.validateAsync(req.body).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { userId } = req.user;
     req.body.userId = userId;
 

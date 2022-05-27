@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 const { NotFoundError, AuthenticationError, InvariantError } = require('../helpers/exceptions');
 const { getPagination } = require('../helpers/paging');
 const { users: usersMessage } = require('../helpers/response-message');
@@ -12,6 +13,13 @@ class UsersUsecase {
   }
 
   async getAllUsers(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
     const ids = await this.usersRepo.findAll(offset, limit);
@@ -28,6 +36,15 @@ class UsersUsecase {
   }
 
   async createUser(req) {
+    const schema = Joi.object().keys({
+      name: Joi.string().required(),
+      email: Joi.string().required(),
+      password: Joi.string().required(),
+    });
+    await schema.validateAsync(req.body).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
+
     const { name, email, password } = req.body;
     const isEmailExist = await this.usersRepo.findByEmail(email);
 
@@ -79,6 +96,13 @@ class UsersUsecase {
   }
 
   async login(req) {
+    const schema = Joi.object().keys({
+      email: Joi.string().required(),
+      password: Joi.string().required(),
+    });
+    await schema.validateAsync(req.body).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
     const user = await this.usersRepo.findByEmail(req.body.email);
 
     if (!user) throw new AuthenticationError(usersMessage.invalidCredential);
@@ -93,6 +117,7 @@ class UsersUsecase {
       id: user.id,
       name: user.name,
       email: user.email,
+      photo: user.photo,
       token,
     };
   }
