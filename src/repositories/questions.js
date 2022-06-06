@@ -5,6 +5,23 @@ class QuestionsRepository {
     this.QuestionsModel = Models.Questions;
   }
 
+  async findAll(offset, limit) {
+    return this.QuestionsModel
+      .findAndCountAll({
+        order: [['createdAt', 'DESC']],
+        attributes: ['id'],
+        limit,
+        offset,
+        raw: true,
+      })
+      .then((questions) => ({
+        count: questions.count,
+        rows: questions.rows.map(
+          (questions.rows, (question) => question.id),
+        ),
+      }));
+  }
+
   async create(question) {
     return this.QuestionsModel
       .create(question)
