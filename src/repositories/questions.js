@@ -22,6 +22,12 @@ class QuestionsRepository {
       }));
   }
 
+  async createBatch(questions) {
+    return this.QuestionsModel
+      .bulkCreate(questions)
+      .then((result) => result);
+  }
+
   async create(question) {
     return this.QuestionsModel
       .create(question)
@@ -45,6 +51,11 @@ class QuestionsRepository {
         },
       })
       .then((result) => result);
+  }
+
+  async deleteBatch() {
+    return this.QuestionsModel
+      .destroy({ where: {} });
   }
 }
 
