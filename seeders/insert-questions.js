@@ -31,7 +31,7 @@ const generateQuestions = () => {
   for (let i = 0; i < alphabet.length; i += 1) {
     const choices = generateChoices(i);
     const questionWithImage = {
-      text: 'Huruf apa yang direpresentasikn oleh gambar bahasa isyarat ini?',
+      text: 'Huruf apa yang direpresentasikan oleh gambar bahasa isyarat ini?',
       image: getImageFromLetter(alphabet[i]),
       first_choice: alphabet[choices[0]],
       second_choice: alphabet[choices[1]],
