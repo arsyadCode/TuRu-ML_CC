@@ -90,6 +90,7 @@ class UsersUsecase {
     return this.usersRepo
       .findById(id)
       .then(async (user) => {
+        if (!user) return null;
         const { password, token, ...result } = user;
         return result;
       });
