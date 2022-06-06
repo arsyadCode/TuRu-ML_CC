@@ -1,5 +1,6 @@
 const Joi = require('joi');
-const { InvariantError } = require('../helpers/exceptions');
+const { InvariantError, NotFoundError } = require('../helpers/exceptions');
+const { questions: questionsMessage } = require('../helpers/response-message');
 
 class QuestionsUsecase {
   constructor(QuestionsRepo) {
@@ -22,6 +23,16 @@ class QuestionsUsecase {
     return this.questionsRepo
       .create(req.body)
       .then((questions) => questions);
+  }
+
+  async updateQuestion(req) {
+    await this.questionsRepo
+      .findById(req.params.id)
+      .then((question) => {
+        if (!question) throw new NotFoundError(questionsMessage.notFound);
+
+        return this.questionsRepo.update(req.params.id, req.body);
+      });
   }
 }
 
