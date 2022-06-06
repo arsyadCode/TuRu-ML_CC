@@ -1,10 +1,25 @@
 const Joi = require('joi');
 const { InvariantError, NotFoundError } = require('../helpers/exceptions');
 const { questions: questionsMessage } = require('../helpers/response-message');
+const { getPagination } = require('../helpers/paging');
 
 class QuestionsUsecase {
   constructor(QuestionsRepo) {
     this.questionsRepo = QuestionsRepo;
+  }
+
+  async getRandomQuestions(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+    const ids = await this.questionsRepo.findAll(offset, limit);
+    return this.resolveQuestions(ids.rows.sort(() => 0.5 - Math.random()));
   }
 
   async createQuestion(req) {
@@ -33,6 +48,25 @@ class QuestionsUsecase {
 
         return this.questionsRepo.update(req.params.id, req.body);
       });
+  }
+
+  async resolveQuestions(ids) {
+    const questions = [];
+    await Promise.all(
+      ids.map(async (id) => {
+        await this.resolveQuestion(id).then((question) => {
+          questions.push(question);
+        });
+      }),
+    );
+
+    return questions;
+  }
+
+  async resolveQuestion(id) {
+    return this.questionsRepo
+      .findById(id)
+      .then(async (question) => question);
   }
 }
 

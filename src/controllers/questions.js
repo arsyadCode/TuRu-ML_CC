@@ -3,8 +3,16 @@ const { questions: questionsMessage } = require('../helpers/response-message');
 class QuestionsController {
   constructor(questionsUsecase) {
     this.questionsUsecase = questionsUsecase;
+    this.getRandomQuestions = this.getRandomQuestions.bind(this);
     this.createQuestion = this.createQuestion.bind(this);
     this.updateQuestion = this.updateQuestion.bind(this);
+  }
+
+  async getRandomQuestions(req, res, next) {
+    return this.questionsUsecase
+      .getRandomQuestions(req)
+      .then((questions) => res.status(200).json(questions))
+      .catch((error) => next(error));
   }
 
   async createQuestion(req, res, next) {
