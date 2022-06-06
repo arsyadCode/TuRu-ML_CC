@@ -24,4 +24,7 @@ module.exports = {
     notFound: 'history not found',
     forbidden: 'history is forbidden',
   },
+  questions: {
+    create: 'question has been created',
+  },
 };
