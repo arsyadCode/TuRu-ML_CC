@@ -26,5 +26,7 @@ module.exports = {
   },
   questions: {
     create: 'question has been created',
+    notFound: 'question not found',
+    update: 'question has been updated',
   },
 };
