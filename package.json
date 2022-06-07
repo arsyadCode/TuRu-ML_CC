@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "seed-up-questions": "node seeders/insert-questions.js \necho '[SUCCESS] database inserted'",
+    "seed-down-questions": "node seeders/delete-questions.js \necho '[SUCCESS] database deleted'"
   },
   "repository": {
     "type": "git",
