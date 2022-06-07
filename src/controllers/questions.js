@@ -4,6 +4,7 @@ class QuestionsController {
   constructor(questionsUsecase) {
     this.questionsUsecase = questionsUsecase;
     this.getAllQuestions = this.getAllQuestions.bind(this);
+    this.getQuestionById = this.getQuestionById.bind(this);
     this.getRandomQuestions = this.getRandomQuestions.bind(this);
     this.createQuestion = this.createQuestion.bind(this);
     this.updateQuestion = this.updateQuestion.bind(this);
@@ -13,6 +14,13 @@ class QuestionsController {
     return this.questionsUsecase
       .getAllQuestions(req)
       .then((questions) => res.status(200).json(questions))
+      .catch((error) => next(error));
+  }
+
+  async getQuestionById(req, res, next) {
+    return this.questionsUsecase
+      .getQuestionById(req.params.id)
+      .then((question) => res.json(question))
       .catch((error) => next(error));
   }
 

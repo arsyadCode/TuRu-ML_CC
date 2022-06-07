@@ -22,6 +22,15 @@ class QuestionsUsecase {
     return this.resolveQuestions(ids.rows);
   }
 
+  getQuestionById(id) {
+    return this.resolveQuestion(id)
+      .then((question) => {
+        if (!question) throw new NotFoundError(questionsMessage.notFound);
+
+        return question;
+      });
+  }
+
   async getRandomQuestions(req) {
     const schema = Joi.object().keys({
       page: Joi.number(),
