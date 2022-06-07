@@ -74,7 +74,7 @@ class HistoryUsecase {
 
     return this.historiesRepo
       .create(req.body)
-      .then((history) => history);
+      .then((history) => this.resolveHistory(history.id));
   }
 
   async deleteHistoryById(req) {
