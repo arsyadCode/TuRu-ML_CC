@@ -1,4 +1,4 @@
-const { questions: questionsMessage, questions } = require('../helpers/response-message');
+const { questions: questionsMessage } = require('../helpers/response-message');
 
 class QuestionsController {
   constructor(questionsUsecase) {

@@ -18,7 +18,7 @@ class QuestionsUsecase {
     });
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
-    const ids = await this.questionsRepo.findAll(offset, size);
+    const ids = await this.questionsRepo.findAll(offset, limit);
     return this.resolveQuestions(ids.rows);
   }
 
