@@ -57,6 +57,15 @@ class QuestionsRepository {
     return this.QuestionsModel
       .destroy({ where: {} });
   }
+
+  async deleteById(id) {
+    return this.QuestionsModel
+      .destroy({ where: {
+        id: parseInt(id, 10),
+      },
+    })
+    .then((result) => result);
+  }
 }
 
 module.exports = QuestionsRepository;

@@ -73,6 +73,16 @@ class QuestionsUsecase {
       });
   }
 
+  async deleteQuestionById(req) {
+    await this.questionsRepo
+      .findById(req.params.id)
+      .then((question) => {
+        if (!question) throw new NotFoundError(questionsMessage.notFound);
+
+        return this.questionsRepo.deleteById(req.params.id);
+      });
+  }
+
   async resolveQuestions(ids) {
     const questions = [];
     await Promise.all(

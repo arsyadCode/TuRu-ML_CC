@@ -6,6 +6,7 @@ module.exports = function questionsRouter(express, questionsController) {
   router.get('/random', questionsController.getRandomQuestions);
   router.post('/', questionsController.createQuestion);
   router.put('/:id', questionsController.updateQuestion);
+  router.delete('/:id', questionsController.deleteQuestionById);
 
   return router;
 };

@@ -8,6 +8,7 @@ class QuestionsController {
     this.getRandomQuestions = this.getRandomQuestions.bind(this);
     this.createQuestion = this.createQuestion.bind(this);
     this.updateQuestion = this.updateQuestion.bind(this);
+    this.deleteQuestionById = this.deleteQuestionById.bind(this);
   }
 
   async getAllQuestions(req, res, next) {
@@ -47,6 +48,15 @@ class QuestionsController {
       .then((question) => res.json({
         message: questionsMessage.update,
         data: question,
+      }))
+      .catch((error) => next(error));
+  }
+
+  async deleteQuestionById(req, res, next) {
+    return this.questionsUsecase
+      .deleteQuestionById(req)
+      .then(() => res.json({
+        message: questionsMessage.delete,
       }))
       .catch((error) => next(error));
   }
