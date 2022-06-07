@@ -1,11 +1,19 @@
-const { questions: questionsMessage } = require('../helpers/response-message');
+const { questions: questionsMessage, questions } = require('../helpers/response-message');
 
 class QuestionsController {
   constructor(questionsUsecase) {
     this.questionsUsecase = questionsUsecase;
+    this.getAllQuestions = this.getAllQuestions.bind(this);
     this.getRandomQuestions = this.getRandomQuestions.bind(this);
     this.createQuestion = this.createQuestion.bind(this);
     this.updateQuestion = this.updateQuestion.bind(this);
+  }
+
+  async getAllQuestions(req, res, next) {
+    return this.questionsUsecase
+      .getAllQuestions(req)
+      .then((questions) => res.status(200).json(questions))
+      .catch((error) => next(error));
   }
 
   async getRandomQuestions(req, res, next) {

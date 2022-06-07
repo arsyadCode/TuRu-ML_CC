@@ -8,6 +8,20 @@ class QuestionsUsecase {
     this.questionsRepo = QuestionsRepo;
   }
 
+  async getAllQuestions(req) {
+    const schema = Joi.object().keys({
+      page: Joi.number(),
+      size: Joi.number(),
+    });
+    await schema.validateAsync(req.query).catch((joiError) => {
+      throw new InvariantError(joiError.details.map((x) => x.message));
+    });
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+    const ids = await this.questionsRepo.findAll(offset, size);
+    return this.resolveQuestions(ids.rows);
+  }
+
   async getRandomQuestions(req) {
     const schema = Joi.object().keys({
       page: Joi.number(),
