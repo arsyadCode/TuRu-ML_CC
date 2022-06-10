@@ -38,7 +38,7 @@ class UsersUsecase {
   async createUser(req) {
     const schema = Joi.object().keys({
       name: Joi.string().required(),
-      email: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required(),
     });
     await schema.validateAsync(req.body).catch((joiError) => {
@@ -98,7 +98,7 @@ class UsersUsecase {
 
   async login(req) {
     const schema = Joi.object().keys({
-      email: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required(),
     });
     await schema.validateAsync(req.body).catch((joiError) => {
