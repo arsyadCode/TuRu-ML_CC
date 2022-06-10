@@ -29,7 +29,15 @@ const gdriveId = {
   others: '1h9DOfF2puZBle-EEXNIgJnTLRjuiqX9A',
 };
 
+const fileStorage = process.env.FILE_STORAGE;
+
 const getImageFromLetter = (letter) => {
+  if (fileStorage === 'google-storage') {
+    if (letter === ' ') return 'https://storage.googleapis.com/turu-bucket/asl_alphabet_test/space_test.jpg';
+
+    return gdriveId[letter.toUpperCase()] ? `https://storage.googleapis.com/turu-bucket/asl_alphabet_test/${letter.toUpperCase()}_test.jpg` : 'https://storage.googleapis.com/turu-bucket/asl_alphabet_test/nothing_test.jpg';
+  }
+
   const imageId = gdriveId[letter.toUpperCase()] ? gdriveId[letter.toUpperCase()] : gdriveId.others;
 
   return `https://drive.google.com/uc?id=${imageId}`;
