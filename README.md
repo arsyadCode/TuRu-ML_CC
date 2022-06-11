@@ -13,6 +13,9 @@
 ## Technologies
 - NodeJS
 - NPM
+- PostgreSQL
+- Google Cloud Compute Engine
+- Google Cloud Storage
 
 ## Install
 - Clone the repository
@@ -32,6 +35,7 @@
   ```
 
 ## Features
+- Register
 - Login
 - History
 - Bookmark
@@ -47,5 +51,6 @@
 
 ## Related links
 - [API/endpoint documentation](https://documenter.getpostman.com/view/16027759/UyxjHSHH)
+- [Android application repository](https://github.com/arsyadCode/TuRu-MD)
 
 ## Reference
