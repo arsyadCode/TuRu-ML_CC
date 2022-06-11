@@ -43,11 +43,11 @@ TuRu (Translator Tuna Rungu) is an android application that educates knowledge o
 - Question for quiz
 
 ## Author
-- [Mutiharis Dauber Panjaitan (M2006F0575)](https://github.com/mutiharisp)
-- [Kiagus Muhammad Arsyad (M7302F2592)](https://github.com/arsyadCode)
-- [Johan Adi Pradana (A7006F0577)](https://github.com/JohanZERO)
-- [Mgs. Tabrani (C2002F0110)](https://github.com/mgstabrani)
-- [Fachry Ananta (C7006F0629)](https://github.com/fachryaa)
+- [Mutiharis Dauber Panjaitan (M2006F0575) - Machine Learning Engineer](https://github.com/mutiharisp)
+- [Kiagus Muhammad Arsyad (M7302F2592) - Machine Learning Engineer](https://github.com/arsyadCode)
+- [Johan Adi Pradana (A7006F0577) - Android Engineer](https://github.com/JohanZERO)
+- [Mgs. Tabrani (C2002F0110) - Cloud Engineer](https://github.com/mgstabrani)
+- [Fachry Ananta (C7006F0629) - Cloud Engineer](https://github.com/fachryaa)
 
 ## Related links
 - [API/endpoint documentation](https://documenter.getpostman.com/view/16027759/UyxjHSHH)
