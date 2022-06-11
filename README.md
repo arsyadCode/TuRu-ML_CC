@@ -45,7 +45,6 @@
 - [Mutiharis Dauber Panjaitan (M2006F0575)](https://github.com/mutiharisp)
 - [Kiagus Muhammad Arsyad (M7302F2592)](https://github.com/arsyadCode)
 - [Johan Adi Pradana (A7006F0577)](https://github.com/JohanZERO)
-- [Muhammad Rayhan Rachmansyah (A2296F2514)]()
 - [Mgs. Tabrani (C2002F0110)](https://github.com/mgstabrani)
 - [Fachry Ananta (C7006F0629)](https://github.com/fachryaa)
 
