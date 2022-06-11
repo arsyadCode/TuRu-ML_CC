@@ -130,7 +130,7 @@ class UsersUsecase {
   }
 
   static async getToken(userId) {
-    return jwt.sign({ userId }, process.env.TOKEN_KEY, { expiresIn: '2h' });
+    return jwt.sign({ userId }, process.env.TOKEN_KEY);
   }
 
   async saveToken(token, userId) {
