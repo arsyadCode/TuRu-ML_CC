@@ -9,6 +9,7 @@
  - [Reference](#Reference)
 
 ## General Info
+TuRu (Translator Tuna Rungu) is an android application that educates knowledge of sign language to community and helps ordinary people to commincate with deaf. This repository contains of machine learning model processing code and back end application of TuRu.
 
 ## Technologies
 - NodeJS
