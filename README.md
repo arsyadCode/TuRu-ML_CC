@@ -18,6 +18,9 @@ TuRu (Translator Tuna Rungu) is an android application that educates knowledge o
 - Google Cloud Compute Engine
 - Google Cloud Storage
 - Google Cloud SQL
+- Google Colab
+- Python 
+- Tensorflow
 
 ## Install
 - Clone the repository
