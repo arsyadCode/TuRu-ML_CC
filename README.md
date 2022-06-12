@@ -55,3 +55,5 @@ TuRu (Translator Tuna Rungu) is an android application that educates knowledge o
 - [Database Design](https://drive.google.com/file/d/1N1CnW5a4K1XYhOkxpc5M-_zuhEk8U5rw/view?usp=sharing)
 
 ## Reference
+- [Dataset of American Sign Language RGB from Victor Geislinger | Kaggle](https://www.kaggle.com/datasets/mrgeislinger/asl-rgb-depth-fingerspelling-spelling-it-out)
+- [Dataset of American Sign Language Alphabet from Akash | Kaggle](https://www.kaggle.com/datasets/grassknoted/asl-alphabet)
