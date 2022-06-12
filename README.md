@@ -52,5 +52,6 @@ TuRu (Translator Tuna Rungu) is an android application that educates knowledge o
 ## Related links
 - [API/endpoint documentation](https://documenter.getpostman.com/view/16027759/UyxjHSHH)
 - [Android application repository](https://github.com/arsyadCode/TuRu-MD)
+- [Database Design](https://drive.google.com/file/d/1N1CnW5a4K1XYhOkxpc5M-_zuhEk8U5rw/view?usp=sharing)
 
 ## Reference
